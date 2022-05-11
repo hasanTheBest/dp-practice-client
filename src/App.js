@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
-import About from "./Components/Views/About";
-import Home from "./Components/Views/Home";
+import About from "./Views/About";
+import Home from "./Views/Home";
 
 function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="container px-4 lg:px-8 xl:px-16">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />

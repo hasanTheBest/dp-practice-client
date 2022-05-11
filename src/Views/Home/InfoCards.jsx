@@ -29,7 +29,7 @@ const infos = [
 const bgs = [
   " bg-gradient-to-r from-primary to-secondary",
   "bg-accent",
-  " bg-gradient-to-r from-secondary to-primary",
+  " bg-gradient-to-r from-secondary to-accent",
 ];
 
 const Info = ({ image, title, desc, bg }) => (

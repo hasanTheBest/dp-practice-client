@@ -12,9 +12,9 @@ const ExceptionalServices = () => {
             alt="Exceptional Services"
           />
           <div>
-            <h1 class="text-5xl font-bold">
+            <h2 class="text-5xl font-bold">
               Exceptional Dental Care, on Your Terms
-            </h1>
+            </h2>
             <p class="py-6">
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The

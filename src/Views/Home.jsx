@@ -4,6 +4,7 @@ import ExceptionalServices from "./Home/ExceptionalServices";
 import Hero from "./Home/Hero";
 import InfoCards from "./Home/InfoCards";
 import Services from "./Home/Services";
+import Testimonial from "./Home/Testimonial";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Services />
       <ExceptionalServices />
       <Appointment />
+      <Testimonial />
     </div>
   );
 };

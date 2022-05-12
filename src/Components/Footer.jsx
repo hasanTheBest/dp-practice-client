@@ -9,46 +9,46 @@ const Footer = () => {
       style={{ backgroundImage: `url(${footer})` }}
     >
       <div className="container px-4 lg:px-8 xl:px-16">
-        <div class="footer p-10">
+        <div className="footer p-10">
           <div>
-            <span class="footer-title">Services</span>
-            <Link class="link link-hover" to="/">
+            <span className="footer-title">Services</span>
+            <Link className="link link-hover" to="/">
               Branding
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Design
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Marketing
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Advertisement
             </Link>
           </div>
           <div>
-            <span class="footer-title">Company</span>
-            <Link class="link link-hover" to="/">
+            <span className="footer-title">Company</span>
+            <Link className="link link-hover" to="/">
               About us
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Contact
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Jobs
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Press kit
             </Link>
           </div>
           <div>
-            <span class="footer-title">Legal</span>
-            <Link class="link link-hover" to="/">
+            <span className="footer-title">Legal</span>
+            <Link className="link link-hover" to="/">
               Terms of use
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Privacy policy
             </Link>
-            <Link class="link link-hover" to="/">
+            <Link className="link link-hover" to="/">
               Cookie policy
             </Link>
           </div>

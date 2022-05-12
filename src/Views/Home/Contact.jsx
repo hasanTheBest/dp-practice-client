@@ -12,19 +12,19 @@ const Contact = () => {
         <input
           type="email"
           placeholder="Email Address"
-          class="input w-full bg-base-200"
+          className="input w-full bg-base-200"
         />
         <input
           type="text"
           placeholder="Subject"
-          class="input w-full bg-base-200"
+          className="input w-full bg-base-200"
         />
         <textarea
-          class="textarea bg-base-200 w-full"
+          className="textarea bg-base-200 w-full"
           placeholder="Your Message"
         ></textarea>
 
-        <button class="btn btn-wide btn-primary">Submit</button>
+        <button className="btn btn-wide btn-primary">Submit</button>
       </form>
     </section>
   );

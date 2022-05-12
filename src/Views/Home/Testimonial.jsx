@@ -28,10 +28,10 @@ const testimonials = [
   },
 ];
 const Testimony = ({ name, text, designation, image }) => (
-  <div class="card bg-base-100 shadow-xl">
-    <div class="card-body">
+  <div className="card bg-base-100 shadow-xl">
+    <div className="card-body">
       <p>{text}</p>
-      <div class="flex gap-4 items-center mt-10">
+      <div className="flex gap-4 items-center mt-10">
         <img src={image} alt={name} />
         <div>
           <h4 className="font-semibold">{name}</h4>

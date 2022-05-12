@@ -13,13 +13,13 @@ const services = [
     desc: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
   },
   {
-    _id: 1,
+    _id: 2,
     image: cavity,
     title: "Cavity Filling",
     desc: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
   },
   {
-    _id: 1,
+    _id: 3,
     image: whitening,
     title: "Teeth whitening",
     desc: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
@@ -27,12 +27,12 @@ const services = [
 ];
 
 const Service = ({ title, image, desc }) => (
-  <div class="card bg-base-100 shadow-xl">
-    <figure class="px-10 pt-10">
-      <img src={image} alt={title} class="rounded-xl" />
+  <div className="card bg-base-100 shadow-xl">
+    <figure className="px-10 pt-10">
+      <img src={image} alt={title} className="rounded-xl" />
     </figure>
-    <div class="card-body items-center text-center">
-      <h2 class="card-title">{title}</h2>
+    <div className="card-body items-center text-center">
+      <h2 className="card-title">{title}</h2>
       <p>{desc}</p>
     </div>
   </div>

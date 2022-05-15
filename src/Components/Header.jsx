@@ -42,16 +42,13 @@ const Header = () => {
                 </li>
               ))}
 
-              {user && (
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
-              )}
-
-              <li onClick={handleClickLogout}>Logout</li>
-
               {user ? (
-                <li onClick={handleClickLogout}>Logout</li>
+                <>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li onClick={handleClickLogout}>Logout</li>
+                </>
               ) : (
                 <li>
                   <Link to={`/login`}>Login</Link>
@@ -71,22 +68,44 @@ const Header = () => {
               </li>
             ))}
 
-            {user && (
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-            )}
-
             {user ? (
-              <li>
-                <button onClick={handleClickLogout}>Logout</button>
-              </li>
+              <>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={handleClickLogout}>Logout</button>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to={`/login`}>Login</Link>
               </li>
             )}
           </ul>
+        </div>
+        <div className="navbar-end lg:hidden">
+          <label
+            tabIndex="1"
+            className="btn btn-ghost drawer-button"
+            for="dashboard-drawer"
+            title="Open Drawer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
         </div>
       </nav>
     </header>

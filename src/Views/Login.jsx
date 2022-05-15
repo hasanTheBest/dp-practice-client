@@ -1,7 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import auth from "../firebase.init";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  // Authentication
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+
+  // Input Validation
   const {
     register,
     handleSubmit,
@@ -9,9 +17,13 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  // Input form submission
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  // handle click sign in with Google
+  const handleClickLogInWithGoogle = () => signInWithGoogle();
 
   return (
     <section className="py-8 md:py-16">
@@ -57,11 +69,38 @@ const Login = () => {
             />
           </form>
 
+          {/* Register and reset */}
+          <div className="my-2 flex justify-between gap-2 text-sm font-semibold">
+            <span>
+              New user?{" "}
+              <Link to="/signup" className="text-secondary uppercase">
+                Sign Up
+              </Link>
+            </span>
+            <span>
+              Forget password?{" "}
+              <button className="text-secondary uppercase">Reset</button>
+            </span>
+          </div>
+
           <div class="divider">OR</div>
 
-          <button class="btn btn-outline btn-secondary">
-            Log in with Google
-          </button>
+          {errorGoogle && (
+            <span className="mb-2 text-red-500">{errorGoogle.message}</span>
+          )}
+
+          {loadingGoogle ? (
+            <button class="btn btn-outline btn-secondary btn-disabled loading">
+              Log in with Google
+            </button>
+          ) : (
+            <button
+              class="btn btn-outline btn-secondary"
+              onClick={handleClickLogInWithGoogle}
+            >
+              Log in with Google
+            </button>
+          )}
         </div>
       </div>
     </section>

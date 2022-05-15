@@ -1,9 +1,10 @@
 import { format } from "date-fns";
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import AppointmentCard from "./AppointmentCard";
 import AppointmentModal from "./AppointmentModal";
 
-const appointments = [
+/* let appointments = [
   {
     _id: 1,
     title: "Teeth Orthodontics",
@@ -56,11 +57,20 @@ const appointments = [
     title: "Teeth Orthodontics",
     time: ["8:00 AM - 9:00 AM", "10:00 AM - 11:00 AM", "8:00 PM - 10:00 AM"],
   },
-];
+]; */
 
 const AppointmentAvailablity = ({ appointmentData }) => {
   const [treatment, setTreatment] = useState("");
   const [appointment, setAppointment] = useState(null);
+
+  // Queries
+  const { isLoading, error, data } = useQuery("treatments", () =>
+    fetch("http://localhost:5000/treatments").then((res) => res.json())
+  );
+
+  if (isLoading) return "Loading....";
+
+  if (error) return "Error while fetching data" + error.message;
 
   return (
     <section className="py-16">
@@ -70,7 +80,7 @@ const AppointmentAvailablity = ({ appointmentData }) => {
         </h6>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {appointments.map((appointment) => (
+          {data.map((appointment) => (
             <AppointmentCard
               key={appointment._id}
               {...appointment}

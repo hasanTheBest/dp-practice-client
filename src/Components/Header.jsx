@@ -1,9 +1,16 @@
 import React from "react";
+import { signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../firebase.init";
 
-const pages = ["Home", "About", "Appointment", "Reviews", "Contact", "Login"];
+const pages = ["Home", "About", "Appointment", "Reviews", "Contact"];
 
 const Header = () => {
+  const [user, loading, error] = useAuthState(auth);
+
+  const handleClickLogout = () => signOut(auth);
+
   return (
     <header>
       <nav className="navbar bg-base-100 container px-4 lg:px-8 xl:px-16">
@@ -34,9 +41,21 @@ const Header = () => {
                   <Link to={`/${page.toLowerCase()}`}>{page}</Link>
                 </li>
               ))}
+
+              <li onClick={handleClickLogout}>Logout</li>
+
+              {user ? (
+                <li onClick={handleClickLogout}>Logout</li>
+              ) : (
+                <li>
+                  <Link to={`/login`}>Login</Link>
+                </li>
+              )}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">Doctors Portal</a>
+          <Link className="btn btn-ghost normal-case text-xl" to="/">
+            Doctors Portal
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -45,6 +64,16 @@ const Header = () => {
                 <Link to={`/${page.toLowerCase()}`}>{page}</Link>
               </li>
             ))}
+
+            {user ? (
+              <li>
+                <button onClick={handleClickLogout}>Logout</button>
+              </li>
+            ) : (
+              <li>
+                <Link to={`/login`}>Login</Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

@@ -1,7 +1,20 @@
 import React from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import auth from "../firebase.init";
 
 const Signup = () => {
+  // Authentication
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+  const [updateProfile] = useUpdateProfile(auth);
+
+  // input validation
   const {
     register,
     handleSubmit,
@@ -9,9 +22,12 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async ({ name, email, password }) => {
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
   };
+
+  if (user) console.log(user);
 
   return (
     <section className="py-8 md:py-16">
@@ -62,13 +78,32 @@ const Signup = () => {
               )}
             </div>
 
+            {error && (
+              <span className="-mb-1 text-red-500">{error.message}</span>
+            )}
+
             {/* Submit button */}
-            <input
-              type="submit"
-              className="btn btn-primary btn-wide self-center"
-              value="Register"
-            />
+            {loading ? (
+              <button className="btn btn-primary btn-wide self-center loading btn-disabled">
+                Register
+              </button>
+            ) : (
+              <input
+                type="submit"
+                className="btn btn-primary btn-wide self-center"
+                value="Register"
+              />
+            )}
           </form>
+
+          <div className="my-2 flex justify-between gap-2 text-sm font-semibold">
+            <span>
+              Already a user?{" "}
+              <Link to="/login" className="text-secondary uppercase">
+                Login
+              </Link>
+            </span>
+          </div>
 
           <div class="divider">OR</div>
 

@@ -91,7 +91,11 @@ const AppointmentAvailablity = ({ appointmentData }) => {
         </div>
       </div>
 
-      <AppointmentModal title={treatment} appointment={appointment} />
+      <AppointmentModal
+        title={treatment}
+        appointment={appointment}
+        appointmentDate={format(appointmentData, "PP")}
+      />
     </section>
   );
 };

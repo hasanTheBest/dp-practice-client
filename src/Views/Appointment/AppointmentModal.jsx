@@ -1,42 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const AppointmentModal = ({ title, appointment }) => {
+const AppointmentModal = ({ title, appointment, appointmentDate }) => {
+  // input validation
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Book Now");
+  // handle appointment submit
+  const handleAppointmentSubmit = (data) => {
     console.log(data);
   };
 
   return (
     <div>
-      <input type="checkbox" id="appointment-modal" class="modal-toggle" />
-      <label for="appointment-modal" class="modal cursor-pointer">
-        <label class="modal-box relative" for="appointment-modal">
+      <input type="checkbox" id="appointment-modal" className="modal-toggle" />
+      <label htmlFor="appointment-modal" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="appointment-modal">
           <label
-            for="appointment-modal"
-            class="btn btn-sm btn-circle absolute right-2 top-2"
+            htmlFor="appointment-modal"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
 
-          <h3 class="text-lg font-bold text-center mb-6">{title}</h3>
+          <h3 className="text-lg font-bold text-center mb-6">{title}</h3>
 
           <form
             className="flex flex-col gap-4"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleAppointmentSubmit)}
           >
+            {/* Name */}
             <div className="flex flex-col gap-2">
               <input
                 type="text"
                 placeholder="Your Name"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("name", { required: true })}
               />
               {errors.name && (
@@ -44,11 +45,12 @@ const AppointmentModal = ({ title, appointment }) => {
               )}
             </div>
 
+            {/* Email */}
             <div className="flex flex-col gap-2">
               <input
                 type="email"
                 placeholder="Your Email"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("email", { required: true })}
               />
               {errors.email && (
@@ -56,19 +58,50 @@ const AppointmentModal = ({ title, appointment }) => {
               )}
             </div>
 
+            {/* Appointment Date */}
             <div className="flex flex-col gap-2">
               <input
-                type="email"
-                class="input input-bordered w-full"
-                value={appointment}
-                disabled
-                {...register("appointment", { required: true })}
+                type="text"
+                className="input input-bordered w-full"
+                defaultValue={appointmentDate}
+                readOnly
+                {...register("appointmentDate", { required: true })}
               />
+              {errors.appointmentDate && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+
+            {/* Appointment time */}
+            <div className="flex flex-col gap-2">
+              <input
+                type="text"
+                className="input input-bordered w-full"
+                defaultValue={appointment}
+                readOnly
+                {...register("appointmentTime", { required: true })}
+              />
+              {errors.appointmentTime && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+
+            {/* Phone number */}
+            <div className="flex flex-col gap-2">
+              <input
+                type="number"
+                className="input input-bordered w-full"
+                placeholder="Phone number"
+                {...register("phone", { required: true })}
+              />
+              {errors.phone && (
+                <span className="text-red-600">This field is required</span>
+              )}
             </div>
 
             <input
               type="submit"
-              className="btn btn-primary btn-wide self-center"
+              className={`btn btn-primary btn-wide self-center`}
               value="Book Now"
             />
           </form>

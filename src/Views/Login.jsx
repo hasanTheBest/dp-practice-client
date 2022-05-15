@@ -27,9 +27,9 @@ const Login = () => {
 
   return (
     <section className="py-8 md:py-16">
-      <div class="card bg-base-100 shadow-xl max-w-md mx-auto">
-        <div class="card-body">
-          <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+      <div className="card bg-base-100 shadow-xl max-w-md mx-auto">
+        <div className="card-body">
+          <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
 
           <form
             className="flex flex-col gap-4"
@@ -40,7 +40,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("email", { required: true })}
               />
               {errors.email && (
@@ -53,7 +53,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Your Password"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("password", { required: true })}
               />
               {errors.password && (
@@ -83,19 +83,19 @@ const Login = () => {
             </span>
           </div>
 
-          <div class="divider">OR</div>
+          <div className="divider">OR</div>
 
           {errorGoogle && (
             <span className="mb-2 text-red-500">{errorGoogle.message}</span>
           )}
 
           {loadingGoogle ? (
-            <button class="btn btn-outline btn-secondary btn-disabled loading">
+            <button className="btn btn-outline btn-secondary btn-disabled loading">
               Log in with Google
             </button>
           ) : (
             <button
-              class="btn btn-outline btn-secondary"
+              className="btn btn-outline btn-secondary"
               onClick={handleClickLogInWithGoogle}
             >
               Log in with Google

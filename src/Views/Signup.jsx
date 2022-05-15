@@ -31,9 +31,9 @@ const Signup = () => {
 
   return (
     <section className="py-8 md:py-16">
-      <div class="card bg-base-100 shadow-xl max-w-md mx-auto">
-        <div class="card-body">
-          <h2 class="text-xl font-bold mb-4 text-center">Sign Up</h2>
+      <div className="card bg-base-100 shadow-xl max-w-md mx-auto">
+        <div className="card-body">
+          <h2 className="text-xl font-bold mb-4 text-center">Sign Up</h2>
 
           <form
             className="flex flex-col gap-4"
@@ -44,7 +44,7 @@ const Signup = () => {
               <input
                 type="name"
                 placeholder="Your Name"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("name", { required: true })}
               />
               {errors.name && (
@@ -57,7 +57,7 @@ const Signup = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("email", { required: true })}
               />
               {errors.email && (
@@ -70,7 +70,7 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="Your Password"
-                class="input input-bordered w-full"
+                className="input input-bordered w-full"
                 {...register("password", { required: true })}
               />
               {errors.password && (
@@ -105,9 +105,9 @@ const Signup = () => {
             </span>
           </div>
 
-          <div class="divider">OR</div>
+          <div className="divider">OR</div>
 
-          <button class="btn btn-outline btn-secondary">
+          <button className="btn btn-outline btn-secondary">
             login with Google
           </button>
         </div>

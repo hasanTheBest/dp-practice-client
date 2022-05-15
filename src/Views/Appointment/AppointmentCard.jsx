@@ -8,7 +8,7 @@ const AppointmentCard = ({ title, time, setTreatment, setAppointment }) => {
     setSelect(selectRef?.current?.value);
   }, []);
 
-  const handleAppointment = (e) => {
+  const handleChangeAppointment = (e) => {
     setSelect(e.target.value);
   };
 
@@ -25,7 +25,7 @@ const AppointmentCard = ({ title, time, setTreatment, setAppointment }) => {
           {time.length > 0 && (
             <select
               className="select select-ghost w-full"
-              onChange={handleAppointment}
+              onChange={handleChangeAppointment}
               ref={selectRef}
             >
               {time.map((t, i) => (

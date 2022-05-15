@@ -42,6 +42,12 @@ const Header = () => {
                 </li>
               ))}
 
+              {user && (
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              )}
+
               <li onClick={handleClickLogout}>Logout</li>
 
               {user ? (
@@ -64,6 +70,12 @@ const Header = () => {
                 <Link to={`/${page.toLowerCase()}`}>{page}</Link>
               </li>
             ))}
+
+            {user && (
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+            )}
 
             {user ? (
               <li>

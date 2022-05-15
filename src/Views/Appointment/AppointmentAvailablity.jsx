@@ -80,10 +80,10 @@ const AppointmentAvailablity = ({ appointmentData }) => {
         </h6>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {data.map((appointment) => (
+          {data.map((a) => (
             <AppointmentCard
-              key={appointment._id}
-              {...appointment}
+              key={a._id}
+              {...a}
               setAppointment={setAppointment}
               setTreatment={setTreatment}
             />
@@ -91,11 +91,13 @@ const AppointmentAvailablity = ({ appointmentData }) => {
         </div>
       </div>
 
-      <AppointmentModal
-        title={treatment}
-        appointment={appointment}
-        appointmentDate={format(appointmentData, "PP")}
-      />
+      {appointment && (
+        <AppointmentModal
+          title={treatment}
+          appointment={appointment}
+          appointmentDate={format(appointmentData, "PP")}
+        />
+      )}
     </section>
   );
 };

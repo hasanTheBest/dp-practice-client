@@ -1,21 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
 const AppointmentCard = ({ title, time, setTreatment, setAppointment }) => {
-  const [select, setSelect] = useState(null);
-  const selectRef = useRef(null);
-
-  useEffect(() => {
-    setSelect(selectRef?.current?.value);
-  }, []);
-
-  const handleChangeAppointment = (e) => {
-    setSelect(e.target.value);
-  };
+  const formRef = useRef(null);
 
   const handleClickBookAppointment = () => {
     setTreatment(title);
-    setAppointment(select);
+    setAppointment(formRef.current.appointment.value);
   };
+
   return (
     <>
       <div className="card bg-neutral text-neutral-content">
@@ -23,17 +15,15 @@ const AppointmentCard = ({ title, time, setTreatment, setAppointment }) => {
           <h2 className="card-title text-primary mb-4">{title}</h2>
 
           {time.length > 0 && (
-            <select
-              className="select select-ghost w-full"
-              onChange={handleChangeAppointment}
-              ref={selectRef}
-            >
-              {time.map((t, i) => (
-                <option key={i} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+            <form ref={formRef}>
+              <select className="select select-ghost w-full" name="appointment">
+                {time.map((t, i) => (
+                  <option key={i} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </form>
           )}
 
           <p>{`${time.length} SPACES AVAILABLE`}</p>

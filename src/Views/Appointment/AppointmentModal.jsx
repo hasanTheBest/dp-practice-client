@@ -122,7 +122,6 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
                 readOnly
                 {...register("appointmentTime", {
                   required: true,
-                  value: watch("appointmentTime"),
                 })}
               />
               {errors.appointmentTime && (

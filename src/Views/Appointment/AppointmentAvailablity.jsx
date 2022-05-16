@@ -70,7 +70,7 @@ const AppointmentAvailablity = ({ appointmentData }) => {
 
   if (isLoading) return "Loading....";
 
-  if (error) return "Error while fetching data" + error.message;
+  if (error) return "Error while fetching data " + error.message;
 
   return (
     <section className="py-16">
@@ -91,13 +91,15 @@ const AppointmentAvailablity = ({ appointmentData }) => {
         </div>
       </div>
 
-      {appointment && (
-        <AppointmentModal
-          title={treatment}
-          appointment={appointment}
-          appointmentDate={format(appointmentData, "PP")}
-        />
-      )}
+      {console.log("before modal", appointment)}
+      {/* {appointment && (
+        
+      )} */}
+      <AppointmentModal
+        title={treatment}
+        appointment={appointment}
+        appointmentDate={format(appointmentData, "PP")}
+      />
     </section>
   );
 };

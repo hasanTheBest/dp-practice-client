@@ -20,15 +20,13 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
 
   // booking the treatment
   const { isLoading, isError, isSuccess, error, mutate, data } = useMutation(
-    (url, data) => {
-      return axios.post(url, data);
+    (payload) => {
+      return axios.post("http://localhost:5000/booking", payload);
     }
   );
 
   // handle appointment submit
-  const handleAppointmentSubmit = (data) => {
-    mutate("http://localhost:5000/booking", data);
-  };
+  const handleAppointmentSubmit = (data) => mutate(data);
 
   if (userError) {
     return <Alert type="error" message={userError.message} />;

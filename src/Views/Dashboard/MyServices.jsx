@@ -29,15 +29,15 @@ const MyServices = () => {
   }
 
   return (
-    <div class="overflow-x-auto">
+    <div className="overflow-x-auto">
       <div>
         <h2 className="text-2xl font-bold my-4 mb-8">{`Welcome ${user.displayName}`}</h2>
         <h2 className="text-3xl font-bold my-4 mb-8">
           Your Services {data.data.length}
         </h2>
       </div>
-      <div class="overflow-x-auto">
-        <table class="table table-zebra w-full">
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
           <thead>
             <tr>
               <th></th>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -59,14 +60,15 @@ import AppointmentModal from "./AppointmentModal";
   },
 ]; */
 
-const AppointmentAvailablity = ({ appointmentData }) => {
-  const [treatment, setTreatment] = useState("");
-  const [appointment, setAppointment] = useState(null);
+const AppointmentAvailablity = ({ appointmentDate }) => {
+  const [appointmentModalData, setAppointmentModalData] = useState(null);
 
   // Queries
-  const { isLoading, error, data } = useQuery("treatments", () =>
-    fetch("http://localhost:5000/treatments").then((res) => res.json())
-  );
+  const {
+    isLoading,
+    error,
+    data: appointments,
+  } = useQuery("treatments", () => axios.get("/treatments"));
 
   if (isLoading) return "Loading....";
 
@@ -76,30 +78,24 @@ const AppointmentAvailablity = ({ appointmentData }) => {
     <section className="py-16">
       <div className="container px-4 lg:px-8 xl:px-16">
         <h6 className="text-primary mb-20 text-xl font-semibold text-center">
-          Available Appointments on {format(appointmentData, "PP")}
+          Available Appointments on {format(appointmentDate, "PP")}
         </h6>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {data.map((a) => (
+          {appointments.data.map((treatment) => (
             <AppointmentCard
-              key={a._id}
-              {...a}
-              setAppointment={setAppointment}
-              setTreatment={setTreatment}
+              key={treatment._id}
+              {...treatment}
+              setAppointmentModalData={setAppointmentModalData}
+              appointmentDate={format(appointmentDate, "PP")}
             />
           ))}
         </div>
       </div>
 
-      {console.log("before modal", appointment)}
-      {/* {appointment && (
-        
-      )} */}
-      <AppointmentModal
-        title={treatment}
-        appointment={appointment}
-        appointmentDate={format(appointmentData, "PP")}
-      />
+      {appointmentModalData && (
+        <AppointmentModal appointmentModalData={appointmentModalData} />
+      )}
     </section>
   );
 };

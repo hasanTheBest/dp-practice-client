@@ -1,12 +1,18 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import Alert from "../../Components/Alert";
 import auth from "../../firebase.init";
 
-const AppointmentModal = ({ title, appointment, appointmentDate }) => {
+const AppointmentModal = ({ appointmentModalData }) => {
+  const {
+    title,
+    day: appointmentDate,
+    time: appointmentTime,
+  } = appointmentModalData;
+
   // user information
   const [user, userLoading, userError] = useAuthState(auth);
 
@@ -14,9 +20,19 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      appointmentDate,
+      appointmentTime,
+    },
+  });
+
+  useEffect(() => {
+    setValue("appointmentDate", appointmentDate);
+    setValue("appointmentTime", appointmentTime);
+  }, [appointmentDate, appointmentTime]);
 
   // booking the treatment
   const { isLoading, isError, isSuccess, error, mutate, data } = useMutation(
@@ -26,11 +42,12 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
   );
 
   // handle appointment submit
-  const handleAppointmentSubmit = (data) => mutate(data);
+  const handleAppointmentSubmit = (data) => mutate({ ...data, title });
 
   if (userError) {
     return <Alert type="error" message={userError.message} />;
   }
+
   if (userLoading) {
     return <Alert type="info" message="User is loading...." />;
   }
@@ -38,8 +55,8 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
   return (
     <div>
       <input type="checkbox" id="appointment-modal" className="modal-toggle" />
-      <label htmlFor="appointment-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="appointment-modal">
+      <div className="modal">
+        <div className="modal-box relative">
           <label
             htmlFor="appointment-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -47,9 +64,11 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
             ✕
           </label>
 
+          {/* Modal Content */}
           <h3 className="text-lg font-bold text-center mb-6">{title}</h3>
 
           {/* booking error */}
+
           {isError && (
             <Alert
               type="error"
@@ -104,9 +123,10 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                defaultValue={appointmentDate}
                 readOnly
-                {...register("appointmentDate", { required: true })}
+                {...register("appointmentDate", {
+                  required: true,
+                })}
               />
               {errors.appointmentDate && (
                 <span className="text-red-600">This field is required</span>
@@ -118,7 +138,6 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                defaultValue={appointment}
                 readOnly
                 {...register("appointmentTime", {
                   required: true,
@@ -157,8 +176,8 @@ const AppointmentModal = ({ title, appointment, appointmentDate }) => {
               />
             )}
           </form>
-        </label>
-      </label>
+        </div>
+      </div>
     </div>
   );
 };

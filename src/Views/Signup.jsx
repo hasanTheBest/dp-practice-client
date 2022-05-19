@@ -1,10 +1,13 @@
+import axios from "axios";
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import Alert from "../Components/Alert";
 import auth from "../firebase.init";
 
 const Signup = () => {
@@ -18,22 +21,49 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+
+  // create user collection in db
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    error: queryErr,
+    mutate,
+    data: queryData,
+  } = useMutation((payload) => {
+    return axios.put("/user", payload);
+  });
 
   const onSubmit = async ({ name, email, password }) => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
   };
 
-  if (user) console.log(user);
+  if (user) {
+    const { displayName, email } = user;
+    mutate({ name: displayName, email });
+  }
+
+  if (isSuccess && queryData.data.token) {
+    localStorage.setItem("accessToken", queryData.data.token);
+  }
 
   return (
     <section className="py-8 md:py-16">
       <div className="card bg-base-100 shadow-xl max-w-md mx-auto">
         <div className="card-body">
           <h2 className="text-xl font-bold mb-4 text-center">Sign Up</h2>
+          <div className="p-4">
+            {isError && <Alert type="error" message={queryErr.message} />}
+
+            {isLoading && <Alert type="info" message="Data is loading...." />}
+
+            {isSuccess && (
+              <Alert type="success" message="Successfully Added a user" />
+            )}
+          </div>
 
           <form
             className="flex flex-col gap-4"

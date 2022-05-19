@@ -6,6 +6,7 @@ import Appointment from "./Views/Appointment";
 import Dashboard from "./Views/Dashboard";
 import MyHistory from "./Views/Dashboard/MyHistory";
 import MyServices from "./Views/Dashboard/MyServices";
+import Users from "./Views/Dashboard/Users";
 import Home from "./Views/Home";
 import Login from "./Views/Login";
 import Signup from "./Views/Signup";
@@ -24,6 +25,7 @@ function App() {
             <Route index element={<MyServices />} />
             <Route path="myServices" element={<MyServices />} />
             <Route path="myHistory" element={<MyHistory />} />
+            <Route path="users" element={<Users />} />
           </Route>
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />

@@ -5,6 +5,13 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import axios from "axios";
+
+// axios default configuration
+axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.headers.common["Authorization"] =
+  localStorage.getItem("accessToken");
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

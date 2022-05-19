@@ -7,7 +7,7 @@ const Appointment = () => {
   return (
     <>
       <AppointmentDatePicker selected={selected} setSelected={setSelected} />
-      <AppointmentAvailablity appointmentData={selected} />
+      <AppointmentAvailablity appointmentDate={selected} />
     </>
   );
 };
